@@ -217,6 +217,18 @@ func (f *frontend) authenticatedRoutes(r *mux.Router) {
 
 	s.Methods(http.MethodPost).HandlerFunc(f.postOpenShiftClusterKubeConfigCredentials).Name("postOpenShiftClusterKubeConfigCredentials")
 
+	s = r.
+		Path("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/detectors").
+		Subrouter()
+
+	s.Methods(http.MethodGet).HandlerFunc(f.listAppLensDetectors).Name("listAppLensDetectors")
+
+	s = r.
+		Path("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/detectors/{detectorId}").
+		Subrouter()
+
+	s.Methods(http.MethodGet).HandlerFunc(f.getAppLensDetector).Name("getAppLensDetector")
+
 	// Admin actions
 	s = r.
 		Path("/admin/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/kubernetesobjects").
