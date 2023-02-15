@@ -601,6 +601,24 @@
         }
       }
     },
+    "MaintenanceProfile": {
+      "description": "MaintenanceProfile represents an ingress profile.",
+      "type": "object",
+      "properties": {
+        "next": {
+          "description": "Next",
+          "type": "string"
+        },
+        "previous": {
+          "description": "previous",
+          "type": "string"
+        },
+        "ip": {
+          "status": "status",
+          "type": "string"
+        }
+      }
+    },
     "MasterProfile": {
       "description": "MasterProfile represents a master profile.",
       "type": "object",
@@ -747,6 +765,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IngressProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "maintenanceProfiles": {
+          "description": "The cluster maintenance profiles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceProfile"
           },
           "x-ms-identifiers": []
         }

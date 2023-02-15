@@ -50,6 +50,7 @@ func NewOpenShiftClustersClientWithBaseURI(baseURI string, subscriptionID string
 // resourceName - the name of the OpenShift cluster resource.
 // parameters - the OpenShift cluster resource.
 func (client OpenShiftClustersClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceName string, parameters OpenShiftCluster) (result OpenShiftClustersCreateOrUpdateFuture, err error) {
+
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/OpenShiftClustersClient.CreateOrUpdate")
 		defer func() {
@@ -60,6 +61,7 @@ func (client OpenShiftClustersClient) CreateOrUpdate(ctx context.Context, resour
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
+
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: client.SubscriptionID,
 			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
@@ -71,6 +73,7 @@ func (client OpenShiftClustersClient) CreateOrUpdate(ctx context.Context, resour
 	}
 
 	req, err := client.CreateOrUpdatePreparer(ctx, resourceGroupName, resourceName, parameters)
+
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "redhatopenshift.OpenShiftClustersClient", "CreateOrUpdate", nil, "Failure preparing request")
 		return
@@ -118,6 +121,7 @@ func (client OpenShiftClustersClient) CreateOrUpdateSender(req *http.Request) (f
 	if err != nil {
 		return
 	}
+
 	var azf azure.Future
 	azf, err = azure.NewFutureFromResponse(resp)
 	future.FutureAPI = &azf

@@ -120,6 +120,14 @@ type IngressProfile struct {
 	IP *string `json:"ip,omitempty"`
 }
 
+// IngressProfile ingressProfile represents an ingress profile.
+type MaintenanceProfile struct {
+	// Name - The ingress profile name.
+	Next     *string `json:"next,omitempty"`
+	Previous *string `json:"previous,omitempty"`
+	Status   *string `json:"status,omitempty"`
+}
+
 // MasterProfile masterProfile represents a master profile.
 type MasterProfile struct {
 	// VMSize - The size of the master VMs.
@@ -448,6 +456,8 @@ type OpenShiftClusterProperties struct {
 	ApiserverProfile *APIServerProfile `json:"apiserverProfile,omitempty"`
 	// IngressProfiles - The cluster ingress profiles.
 	IngressProfiles *[]IngressProfile `json:"ingressProfiles,omitempty"`
+	// MaintenanceProfiles - The cluster ingress profiles.
+	MaintenanceProfiles *[]MaintenanceProfile `json:"maintenanceProfiles,omitempty"`
 }
 
 // OpenShiftClustersCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a

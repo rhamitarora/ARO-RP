@@ -77,7 +77,7 @@ func validOpenShiftCluster() *OpenShiftCluster {
 				ClientID:     "11111111-1111-1111-1111-111111111111",
 			},
 			NetworkProfile: NetworkProfile{
-				PodCIDR:     "10.128.0.0/14",
+				PodCIDR:     "10.128.0.0/19",
 				ServiceCIDR: "172.30.0.0/16",
 			},
 			MasterProfile: MasterProfile{
@@ -105,6 +105,13 @@ func validOpenShiftCluster() *OpenShiftCluster {
 					Name:       "default",
 					Visibility: VisibilityPublic,
 					IP:         "1.2.3.4",
+				},
+			},
+			MaintenanceProfiles: []MaintenanceProfile{
+				{
+					Previous: "default",
+					Status:   "default",
+					Next:     "default",
 				},
 			},
 		},

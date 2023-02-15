@@ -19,6 +19,8 @@ package redhatopenshift
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/Azure/go-autorest/autorest"
@@ -96,7 +98,10 @@ func (client OpenShiftClustersClient) CreateOrUpdatePreparer(ctx context.Context
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
-
+	fmt.Println()
+	aJSON, _ := json.Marshal(parameters)
+	fmt.Printf("JSON Print - \n%s\n", string(aJSON))
+	//os.Exit(-1)
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),

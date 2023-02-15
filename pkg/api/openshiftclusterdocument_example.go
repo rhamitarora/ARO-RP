@@ -50,7 +50,7 @@ func ExampleOpenShiftClusterDocument() *OpenShiftClusterDocument {
 					ClientID:     "clientId",
 				},
 				NetworkProfile: NetworkProfile{
-					PodCIDR:     "10.128.0.0/14",
+					PodCIDR:     "10.128.0.0/19",
 					ServiceCIDR: "172.30.0.0/16",
 				},
 				MasterProfile: MasterProfile{
@@ -76,6 +76,13 @@ func ExampleOpenShiftClusterDocument() *OpenShiftClusterDocument {
 						Name:       "default",
 						Visibility: VisibilityPublic,
 						IP:         "1.2.3.4",
+					},
+				},
+				MaintenanceProfiles: []MaintenanceProfile{
+					{
+						Next:     "default",
+						Previous: "default",
+						Status:   "default",
 					},
 				},
 				Install: &Install{

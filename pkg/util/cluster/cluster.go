@@ -353,7 +353,7 @@ func (c *Cluster) generateSubnets() (vnetPrefix string, masterSubnet string, wor
 	} else {
 		x, y = rand.Intn((124))+3, 2*rand.Intn(128)
 	}
-	vnetPrefix = fmt.Sprintf("10.%d.%d.0/23", x, y)
+	vnetPrefix = fmt.Sprintf("10.%d.%d.0/16", x, y)
 	masterSubnet = fmt.Sprintf("10.%d.%d.0/24", x, y)
 	workerSubnet = fmt.Sprintf("10.%d.%d.0/24", x, y+1)
 	return
@@ -452,7 +452,7 @@ func (c *Cluster) createCluster(ctx context.Context, vnetResourceGroup, clusterN
 				ClientSecret: api.SecureString(clientSecret),
 			},
 			NetworkProfile: api.NetworkProfile{
-				PodCIDR:                "10.128.0.0/14",
+				PodCIDR:                "10.128.0.0/15",
 				ServiceCIDR:            "172.30.0.0/16",
 				SoftwareDefinedNetwork: api.SoftwareDefinedNetworkOpenShiftSDN,
 			},
@@ -480,6 +480,13 @@ func (c *Cluster) createCluster(ctx context.Context, vnetResourceGroup, clusterN
 				{
 					Name:       "default",
 					Visibility: visibility,
+				},
+			},
+			MaintenanceProfiles: []api.MaintenanceProfile{
+				{
+					Next:     "default",
+					Status:   "default",
+					Previous: "default",
 				},
 			},
 		},

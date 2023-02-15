@@ -22,7 +22,7 @@
           "clientSecret": "clientSecret"
         },
         "networkProfile": {
-          "podCidr": "10.128.0.0/14",
+          "podCidr": "10.128.0.0/19",
           "serviceCidr": "172.30.0.0/16"
         },
         "masterProfile": {
@@ -46,6 +46,14 @@
           {
             "name": "default",
             "visibility": "Public"
+          }
+        ],
+        "maintenanceProfiles": [
+          {
+            "next": "default",
+            "previous": "default",
+            "status": "default"
+            
           }
         ]
       }
@@ -83,7 +91,7 @@
             "clientId": "clientId"
           },
           "networkProfile": {
-            "podCidr": "10.128.0.0/14",
+            "podCidr": "10.128.0.0/19",
             "serviceCidr": "172.30.0.0/16"
           },
           "masterProfile": {
@@ -109,6 +117,14 @@
               "name": "default",
               "visibility": "Public",
               "ip": "1.2.3.4"
+            }
+          ],
+          "maintenanceProfiles": [
+            {
+              "next": "test",
+              "previous": "test",
+              "status": "test"
+              
             }
           ]
         }
@@ -145,7 +161,7 @@
             "clientId": "clientId"
           },
           "networkProfile": {
-            "podCidr": "10.128.0.0/14",
+            "podCidr": "10.128.0.0/19",
             "serviceCidr": "172.30.0.0/16"
           },
           "masterProfile": {
@@ -171,6 +187,14 @@
               "name": "default",
               "visibility": "Public",
               "ip": "1.2.3.4"
+            }
+          ],
+          "maintenanceProfiles": [
+            {
+              "next": "test",
+              "previous": "test",
+              "status": "test"
+              
             }
           ]
         }

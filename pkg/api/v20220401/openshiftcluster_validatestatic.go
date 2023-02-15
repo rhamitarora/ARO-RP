@@ -106,6 +106,7 @@ func (sv openShiftClusterStaticValidator) validateProperties(path string, p *Ope
 	}
 
 	if isCreate {
+
 		if len(p.WorkerProfiles) != 1 {
 			return api.NewCloudError(http.StatusBadRequest, api.CloudErrorCodeInvalidParameter, path+".workerProfiles", "There should be exactly one worker profile.")
 		}
@@ -117,6 +118,13 @@ func (sv openShiftClusterStaticValidator) validateProperties(path string, p *Ope
 			return api.NewCloudError(http.StatusBadRequest, api.CloudErrorCodeInvalidParameter, path+".ingressProfiles", "There should be exactly one ingress profile.")
 		}
 		if err := sv.validateIngressProfile(path+".ingressProfiles['"+p.IngressProfiles[0].Name+"']", &p.IngressProfiles[0]); err != nil {
+			return err
+		}
+
+		if len(p.MaintenanceProfiles) != 1 {
+			return api.NewCloudError(http.StatusBadRequest, api.CloudErrorCodeInvalidParameter, path+".maintenanceProfiles", "There should be exactly one ingress profile.")
+		}
+		if err := sv.validateMaintenanceProfile(path+".maintenanceProfiles['"+p.MaintenanceProfiles[0].Previous+"']", &p.MaintenanceProfiles[0]); err != nil {
 			return err
 		}
 	}
@@ -343,6 +351,13 @@ func (sv openShiftClusterStaticValidator) validateIngressProfile(path string, p 
 		}
 	}
 
+	return nil
+}
+
+func (sv openShiftClusterStaticValidator) validateMaintenanceProfile(path string, p *MaintenanceProfile) error {
+	if p.Previous != "default" {
+		return api.NewCloudError(http.StatusBadRequest, api.CloudErrorCodeInvalidParameter, path+".previous", "The provided ingress name '%s' is invalid.", p.Previous)
+	}
 	return nil
 }
 
